@@ -1,4 +1,4 @@
-package by.yarik.truth_or_dare.base
+package by.yarik.truth_or_dare.base.baseview
 
 import android.app.ProgressDialog
 import android.os.Bundle
@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.yarik.truth_or_dare.R
+import by.yarik.truth_or_dare.base.basepresenter.IBasePresenter
 
-abstract class BaseFragment<P : IBasePresenter>(var presenter: IBasePresenter) : Fragment(), IBaseView {
+abstract class BaseFragment<P : IBasePresenter>(var presenter: IBasePresenter) : Fragment(),
+    IBaseView {
 
     private lateinit var progressDialog: ProgressDialog
 

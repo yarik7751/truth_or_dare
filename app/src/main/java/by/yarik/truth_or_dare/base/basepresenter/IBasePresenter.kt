@@ -1,4 +1,4 @@
-package by.yarik.truth_or_dare.base
+package by.yarik.truth_or_dare.base.basepresenter
 
 import android.os.Bundle
 
