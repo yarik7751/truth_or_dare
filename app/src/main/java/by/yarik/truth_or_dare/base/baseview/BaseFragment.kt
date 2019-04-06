@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import by.yarik.truth_or_dare.R
 import by.yarik.truth_or_dare.base.basepresenter.IBasePresenter
 
-abstract class BaseFragment<P : IBasePresenter>(var presenter: IBasePresenter) : Fragment(),
-    IBaseView {
+abstract class BaseFragment<P : IBasePresenter>() : Fragment(), IBaseView {
+
+    lateinit var presenter: IBasePresenter
 
     private lateinit var progressDialog: ProgressDialog
 
