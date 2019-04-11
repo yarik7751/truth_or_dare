@@ -8,12 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import by.yarik.truth_or_dare.R
 import by.yarik.truth_or_dare.base.basepresenter.IBasePresenter
+import by.yarik.truth_or_dare.core.IResourceManager
+import by.yarik.truth_or_dare.core.ResourceManager
 
 abstract class BaseFragment<P : IBasePresenter>() : Fragment(), IBaseView {
 
     lateinit var presenter: IBasePresenter
 
     private lateinit var progressDialog: ProgressDialog
+    protected lateinit var resourceManager: IResourceManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        resourceManager = ResourceManager(context);
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(resourceLayout(), container, false);
