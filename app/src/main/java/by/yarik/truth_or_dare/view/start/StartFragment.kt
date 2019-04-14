@@ -29,4 +29,8 @@ class StartFragment : BaseFragment<IStartPresenter>(), IStartView {
     override fun showError(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
+
+    override fun openMainScreen() {
+
+    }
 }

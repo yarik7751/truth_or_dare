@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">truth_or_dare</string>
     <string name="please_wait">Please, wait ...</string>
+    <string name="room_error">Database error</string>
 </resources>

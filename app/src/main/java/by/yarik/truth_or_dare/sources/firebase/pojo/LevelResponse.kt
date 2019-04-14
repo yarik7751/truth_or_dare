@@ -1,8 +1,8 @@
-package by.yarik.truth_or_dare.firebase.pojo
+package by.yarik.truth_or_dare.sources.firebase.pojo
 
 import com.google.firebase.database.PropertyName
 
-class Level {
+class LevelResponse {
 
     @set:PropertyName("title")
     @get:PropertyName("title")
