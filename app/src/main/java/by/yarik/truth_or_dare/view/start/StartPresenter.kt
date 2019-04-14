@@ -44,6 +44,7 @@ class StartPresenter(view : IStartView, resourceManager: IResourceManager) : Bas
     }
 
     private fun getLevels() {
+        view.showLoading()
         val database = FirebaseDatabase.getInstance();
         val mainReference = database.reference;
         val levelReference = mainReference.child(LEVELS);
@@ -74,6 +75,9 @@ class StartPresenter(view : IStartView, resourceManager: IResourceManager) : Bas
                 levelDao.insert(it)
             }
         }
+            .doOnTerminate {
+                view.hideLoading()
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

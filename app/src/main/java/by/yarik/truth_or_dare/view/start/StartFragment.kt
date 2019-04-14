@@ -31,6 +31,6 @@ class StartFragment : BaseFragment<IStartPresenter>(), IStartView {
     }
 
     override fun openMainScreen() {
-
+        navigation.openMainScreen()
     }
 }
