@@ -6,6 +6,8 @@ import android.support.annotation.StringRes
 
 interface IResourceManager {
 
+    fun getContext(): Context?
+
     fun getColor(@ColorRes res: Int): Int
 
     fun getString(@StringRes res: Int): String

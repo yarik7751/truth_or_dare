@@ -6,6 +6,10 @@ import android.support.annotation.StringRes
 
 class ResourceManager(private val context: Context?) : IResourceManager {
 
+    override fun getContext(): Context? {
+        return context
+    }
+
     override fun getColor(@ColorRes res: Int): Int {
         return context!!.resources.getColor(res)
     }
