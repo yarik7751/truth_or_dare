@@ -8,5 +8,5 @@ interface IBasePresenter {
 
     fun onViewCreated(bundle: Bundle?)
 
-    fun onDestroy() {}
+    fun onDestroy()
 }

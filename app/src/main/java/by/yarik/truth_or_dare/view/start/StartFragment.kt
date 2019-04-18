@@ -4,7 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import by.yarik.truth_or_dare.R
+import by.yarik.truth_or_dare.TruthOrDareApplication
 import by.yarik.truth_or_dare.base.baseview.BaseFragment
+import by.yarik.truth_or_dare.data.start.StartRepository
+import by.yarik.truth_or_dare.domain.start.StartInteractor
+import by.yarik.truth_or_dare.sources.preferences.Preferences
+import com.google.firebase.database.FirebaseDatabase
 
 class StartFragment : BaseFragment<IStartPresenter>(), IStartView {
 
@@ -23,7 +28,9 @@ class StartFragment : BaseFragment<IStartPresenter>(), IStartView {
     }
 
     override fun initPresenter(): IStartPresenter {
-        return StartPresenter(this, resourceManager)
+        val repository = StartRepository(FirebaseDatabase.getInstance(), Preferences.getInstance(context)!!, TruthOrDareApplication.getInstance().roomDatabase)
+        val interactor = StartInteractor(repository)
+        return StartPresenter(this, resourceManager, interactor)
     }
 
     override fun showError(text: String) {
