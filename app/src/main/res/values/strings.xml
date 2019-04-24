@@ -3,4 +3,5 @@
     <string name="please_wait">Please, wait ...</string>
     <string name="server_error">Server error</string>
     <string name="room_error">Database error</string>
+    <string name="main_levels_title">Levels</string>
 </resources>

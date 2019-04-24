@@ -80,6 +80,10 @@ class StartRepository(
         callback.onLocalVersionResult(preferences.getDataVersion())
     }
 
+    override fun setLocalVersion(newVersion: String) {
+        preferences.setDataVersion(newVersion)
+    }
+
     override fun insertLevelsToDb(levelsDomain: List<LevelDomainDto>): Observable<Unit> {
         val levelDao = database.levelDao()
         val levelsDb = LevelMapper.domainToDb(levelsDomain)

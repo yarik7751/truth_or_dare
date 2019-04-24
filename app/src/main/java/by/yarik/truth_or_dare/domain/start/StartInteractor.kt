@@ -53,7 +53,8 @@ class StartInteractor(var repository: IStartRepository): BaseInteractor(), IStar
     }
 
     override fun onLocalVersionResult(localVersion: String) {
-        if(localVersion.contentEquals(version)) {
+        if(!localVersion.contentEquals(version)) {
+            repository.setLocalVersion(version)
             callback.insertLevelsToDb(repository.insertLevelsToDb(levels).subscribeOn(Schedulers.io()))
         } else {
             callback.rightVersion()

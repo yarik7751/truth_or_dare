@@ -16,5 +16,7 @@ interface IStartRepository: IBaseRepository {
 
     fun getLocalVersion()
 
+    fun setLocalVersion(newVersion: String)
+
     fun insertLevelsToDb(levelsDomain: List<LevelDomainDto>): Observable<Unit>
 }

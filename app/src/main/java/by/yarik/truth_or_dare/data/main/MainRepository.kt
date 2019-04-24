@@ -4,6 +4,8 @@ import by.yarik.truth_or_dare.core.mappers.LevelMapper
 import by.yarik.truth_or_dare.data.BaseRepository
 import by.yarik.truth_or_dare.domain.main.IMainRepository
 import by.yarik.truth_or_dare.sources.db.TruthOrDareDatabase
+import by.yarik.truth_or_dare.view.start.domaindto.LevelDomainDto
+import io.reactivex.Observable
 
 class MainRepository(var database: TruthOrDareDatabase): BaseRepository(), IMainRepository {
 
@@ -14,8 +16,13 @@ class MainRepository(var database: TruthOrDareDatabase): BaseRepository(), IMain
     }
 
     override fun getLevels() {
+        callback.onLevelsResult(Observable.fromCallable {
+            return@fromCallable getLevelsFromDb()
+        })
+    }
+
+    private fun getLevelsFromDb(): List<LevelDomainDto> {
         val listLevelsDb = database.levelDao().getAllLevels()
-        val listLevels = LevelMapper.dbToDomain(listLevelsDb)
-        callback.onLevelsResult(listLevels)
+        return LevelMapper.dbToDomain(listLevelsDb)
     }
 }
