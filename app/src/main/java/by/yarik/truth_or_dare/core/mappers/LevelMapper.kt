@@ -6,23 +6,6 @@ import by.yarik.truth_or_dare.view.start.domaindto.LevelDomainDto
 
 object LevelMapper {
 
-    fun mappingLevelItems(responses: List<LevelResponse>): List<LevelDb> {
-        val result = mutableListOf<LevelDb>()
-        responses.forEach(){
-            result.add(applyLevelMapper(it))
-        }
-
-        return result
-    }
-
-    private fun applyLevelMapper(response: LevelResponse): LevelDb {
-        val enTitle = response.title.enTitle
-        val ruTitle = response.title.ruTitle
-        val value = response.value
-
-        return LevelDb(0, enTitle, ruTitle, value)
-    }
-
     fun responseToDomain(responses: List<LevelResponse>): List<LevelDomainDto> {
         val result = mutableListOf<LevelDomainDto>()
         responses.forEach {
@@ -57,5 +40,22 @@ object LevelMapper {
         val ruTitle = domain.ruTitle
 
         return LevelDb(0, enTitle, ruTitle, value)
+    }
+
+    public fun dbToDomain(dbLevels: List<LevelDb>): List<LevelDomainDto> {
+        val result = mutableListOf<LevelDomainDto>()
+        dbLevels.forEach {
+            result.add(dbToDomainItem(it))
+        }
+
+        return result
+    }
+
+    private fun dbToDomainItem(dbLevel: LevelDb): LevelDomainDto {
+        val value = dbLevel.value
+        val enTitle = dbLevel.enTitle
+        val ruTitle = dbLevel.ruTitle
+
+        return LevelDomainDto(value, enTitle, ruTitle)
     }
 }

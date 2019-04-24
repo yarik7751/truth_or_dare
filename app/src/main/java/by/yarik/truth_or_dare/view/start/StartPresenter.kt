@@ -29,8 +29,7 @@ import java.util.*
 class StartPresenter(
     view : IStartView,
     resourceManager: IResourceManager,
-    var interactor: IStartInteractor):
-    BasePresenter<IStartView>(view, resourceManager), IStartPresenter, IStartInteractorCallback {
+    var interactor: IStartInteractor): BasePresenter<IStartView>(view, resourceManager), IStartPresenter, IStartInteractorCallback {
 
     init {
         interactor.initCallback(this)
@@ -56,12 +55,16 @@ class StartPresenter(
     }
 
     override fun insertLevelsToDb(insertLevelsDb: Observable<Unit>) {
-        insertLevelsDb
+        addDicposable(insertLevelsDb
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(Consumer {
+            .subscribe({
+                view.openMainScreen()
+            }, {
+                onThrowable(it)
+            }))
+    }
 
-            }, Consumer {
-
-            })
+    override fun rightVersion() {
+        view.openMainScreen()
     }
 }

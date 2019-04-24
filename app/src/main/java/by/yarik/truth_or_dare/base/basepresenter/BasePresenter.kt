@@ -20,4 +20,8 @@ abstract class BasePresenter<V : IBaseView>(var view : V, var resourceManager: I
     override fun onDestroy() {
         compositeDisposable.clear()
     }
+
+    protected fun onThrowable(throwable: Throwable) {
+
+    }
 }

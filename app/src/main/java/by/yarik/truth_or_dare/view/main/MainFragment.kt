@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import by.yarik.truth_or_dare.R
+import by.yarik.truth_or_dare.TruthOrDareApplication
 import by.yarik.truth_or_dare.base.baseview.BaseFragment
+import by.yarik.truth_or_dare.data.main.MainRepository
+import by.yarik.truth_or_dare.domain.main.MainInteractor
 import by.yarik.truth_or_dare.sources.db.entity.LevelDb
 
 class MainFragment: BaseFragment<IMainPresenter>(), IMainView {
@@ -24,7 +27,9 @@ class MainFragment: BaseFragment<IMainPresenter>(), IMainView {
     }
 
     override fun initPresenter(): IMainPresenter {
-        return MainPresenter(this, resourceManager)
+        val repository = MainRepository(TruthOrDareApplication.getInstance().roomDatabase)
+        val interactor = MainInteractor(repository)
+        return MainPresenter(this, resourceManager, interactor, repository)
     }
 
     override fun updateLevels(levels: List<LevelDb>) {

@@ -9,4 +9,6 @@ interface IStartInteractorCallback {
     fun onVersionError(error: String)
 
     fun insertLevelsToDb(insertLevelsDb: Observable<Unit>);
+
+    fun rightVersion();
 }
