@@ -28,7 +28,11 @@ class StartFragment : BaseFragment<IStartPresenter>(), IStartView {
     }
 
     override fun initPresenter(): IStartPresenter {
-        val repository = StartRepository(FirebaseDatabase.getInstance(), Preferences.getInstance(context)!!, TruthOrDareApplication.getInstance().roomDatabase)
+        val repository = StartRepository(
+            FirebaseDatabase.getInstance(),
+            Preferences.getInstance(context)!!,
+            TruthOrDareApplication.getInstance().roomDatabase
+        )
         val interactor = StartInteractor(repository)
         return StartPresenter(this, resourceManager, interactor)
     }

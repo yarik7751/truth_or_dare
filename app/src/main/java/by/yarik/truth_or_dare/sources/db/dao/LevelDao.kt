@@ -17,4 +17,7 @@ interface LevelDao {
 
     @Query("SELECT * FROM levels")
     fun getAllLevels(): List<LevelDb>
+
+    @Query("DELETE FROM levels")
+    fun deleteAllLevels()
 }

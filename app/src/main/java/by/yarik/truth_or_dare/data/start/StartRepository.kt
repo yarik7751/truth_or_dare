@@ -1,29 +1,23 @@
 package by.yarik.truth_or_dare.data.start
 
-import android.arch.persistence.room.RoomDatabase
-import android.util.Log
-import by.yarik.truth_or_dare.R
-import by.yarik.truth_or_dare.TruthOrDareApplication
 import by.yarik.truth_or_dare.core.mappers.LevelMapper
 import by.yarik.truth_or_dare.data.BaseRepository
 import by.yarik.truth_or_dare.domain.start.IStartRepository
 import by.yarik.truth_or_dare.sources.db.TruthOrDareDatabase
 import by.yarik.truth_or_dare.sources.firebase.pojo.LevelResponse
 import by.yarik.truth_or_dare.sources.preferences.Preferences
-import by.yarik.truth_or_dare.view.start.StartPresenter
 import by.yarik.truth_or_dare.view.start.domaindto.LevelDomainDto
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class StartRepository(
     var firebaseDatabase: FirebaseDatabase,
     var preferences: Preferences,
-    var database: TruthOrDareDatabase): BaseRepository(), IStartRepository {
+    var database: TruthOrDareDatabase
+) : BaseRepository(), IStartRepository {
 
     companion object {
         const val LEVELS = "levels"
@@ -40,7 +34,7 @@ class StartRepository(
         val mainReference = firebaseDatabase.reference
         val versionReference = mainReference.child(VERSION)
 
-        versionReference.addListenerForSingleValueEvent(object: ValueEventListener {
+        versionReference.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val version: String = dataSnapshot.value.toString()
@@ -58,11 +52,11 @@ class StartRepository(
         val mainReference = firebaseDatabase.reference
         val levelReference = mainReference.child(LEVELS)
 
-        levelReference.addListenerForSingleValueEvent(object: ValueEventListener {
+        levelReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val levels: MutableList<LevelResponse> = mutableListOf()
 
-                for(post in dataSnapshot.children) {
+                for (post in dataSnapshot.children) {
                     val level: LevelResponse = post.getValue(LevelResponse::class.java)!!
                     levels.add(level)
                 }
